@@ -1,0 +1,38 @@
+import React, { Component } from 'react';
+import {AppConfig} from "./Components/AppConfig/AppConfig";
+import Grid from '@material-ui/core/Grid';
+import {ContactList} from "./Components/ContactList/ContactList";
+import {Chat} from "./Components/Chat/Chat";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedContact: {}
+    }
+  }
+
+  selectContact(contact) {
+    this.setState({selectedContact: contact})
+  }
+
+  render() {
+    const {selectedContact} = this.state;
+
+    return (
+      <AppConfig fb={this.props.fb}>
+        <Grid container spacing={0}>
+          <Grid item xs={3}>
+            <ContactList selectContact={(contact) => this.selectContact(contact)} selectedContact={selectedContact} />
+          </Grid>
+          <Grid item xs={9}>
+            <Chat selectedContact={selectedContact}/>
+          </Grid>
+        </Grid>
+      </AppConfig>
+    );
+  }
+}
+
+export default App;
