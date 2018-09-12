@@ -4,6 +4,6 @@ import App from './App';
 import './index.css';
 import {initializeFirebase} from "./firebaseConfig";
 
-const {fb, rebase} = initializeFirebase();
+const {auth, rebase} = initializeFirebase();
 
-ReactDOM.render(<App fb={fb} rebase={rebase} />, document.getElementById('root'));
+ReactDOM.render(<App auth={auth} db={rebase} />, document.getElementById('root'));

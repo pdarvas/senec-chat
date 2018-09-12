@@ -13,6 +13,6 @@ export function initializeFirebase() {
 
   const rebase = Rebase.createClass(fb.database());
 
-  return {fb, rebase}
+  return {auth: fb.auth(), rebase}
 }
 

@@ -12,7 +12,7 @@ export class AppConfig extends Component {
   render() {
     return (
       <JssProvider jss={jss} generateClassName={generateClassName}>
-        <Authorizer fb={this.props.fb}>
+        <Authorizer auth={this.props.auth} db={this.props.db}>
           {this.props.children}
         </Authorizer>
       </JssProvider>

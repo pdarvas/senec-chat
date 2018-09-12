@@ -20,11 +20,21 @@ class App extends Component {
   render() {
     const {selectedContact} = this.state;
 
+    const {
+      auth,
+      db
+    } = this.props;
+
     return (
-      <AppConfig fb={this.props.fb}>
+      <AppConfig auth={auth} db={db}>
         <Grid container spacing={0}>
           <Grid item xs={3}>
-            <ContactList selectContact={(contact) => this.selectContact(contact)} selectedContact={selectedContact} />
+            <ContactList
+              selectContact={(contact) => this.selectContact(contact)}
+              selectedContact={selectedContact}
+              uid={auth.currentUser && auth.currentUser.uid}
+              db={db}
+            />
           </Grid>
           <Grid item xs={9}>
             <Chat selectedContact={selectedContact}/>

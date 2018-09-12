@@ -37,8 +37,24 @@ export class ContactList extends Component {
     super(props);
 
     this.state = {
-      selected: {}
+      selected: {},
+      contacts: []
     }
+  }
+
+
+  componentDidUpdate() {
+    const {
+      uid,
+      db
+    } = this.props;
+
+    db.bindToState(`users`, {
+      context: this,
+      state: 'contacts',
+      asArray: 'true'
+    })
+
   }
 
   selectContact(contact) {
@@ -50,13 +66,13 @@ export class ContactList extends Component {
       <Wrapper>
         <CustomBar text={'Contatos'}/>
         <List>
-        {contacts.map(contact => (
+        {this.state.contacts.map(contact => (
           <ListItem
             button
             onClick={() => this.selectContact(contact)}
             selected={this.props.selectedContact.name === contact.name}
           >
-            <Avatar src={contact.avatar} />
+            <Avatar src={contact.user} />
             <ListItemText primary={contact.name} />
           </ListItem>
         ))

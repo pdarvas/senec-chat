@@ -46,46 +46,6 @@ const messages = [
     text: 'Eu acho engracado',
     isMine: false
   },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
-  {
-    text: 'Eu acho engracado',
-    isMine: false
-  },
 
 ];
 
