@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      selectedContact: {}
+      selectedContact: {},
+      uid: undefined
     }
   }
 
@@ -18,7 +19,7 @@ class App extends Component {
   }
 
   render() {
-    const {selectedContact} = this.state;
+    const {selectedContact, uid} = this.state;
 
     const {
       auth,
@@ -26,18 +27,22 @@ class App extends Component {
     } = this.props;
 
     return (
-      <AppConfig auth={auth} db={db}>
+      <AppConfig auth={auth} db={db} setUid={(uid) => this.setState({uid})}>
         <Grid container spacing={0}>
           <Grid item xs={3}>
             <ContactList
               selectContact={(contact) => this.selectContact(contact)}
               selectedContact={selectedContact}
-              uid={auth.currentUser && auth.currentUser.uid}
+              uid={uid}
               db={db}
             />
           </Grid>
           <Grid item xs={9}>
-            <Chat selectedContact={selectedContact}/>
+            <Chat
+              selectedContact={selectedContact}
+              uid={uid}
+              db={db}
+            />
           </Grid>
         </Grid>
       </AppConfig>

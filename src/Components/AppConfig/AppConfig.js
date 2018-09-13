@@ -12,7 +12,7 @@ export class AppConfig extends Component {
   render() {
     return (
       <JssProvider jss={jss} generateClassName={generateClassName}>
-        <Authorizer auth={this.props.auth} db={this.props.db}>
+        <Authorizer auth={this.props.auth} db={this.props.db} setUid={this.props.setUid}>
           {this.props.children}
         </Authorizer>
       </JssProvider>

@@ -13,7 +13,7 @@ export function CustomBar(props) {
   return (
     <AppBar position="static" color="default">
       <Toolbar>
-        {props.avatar && <CustomAvatar src={props.avatar} />}
+        {props.photo && <CustomAvatar src={props.photo} />}
         <Typography variant="title" color="inherit">
           {props.text}
         </Typography>

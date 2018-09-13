@@ -31,7 +31,7 @@ export class MessageBar extends Component {
     }
   }
 
-  sendMessage(e){
+  sendMessage(e) {
     if (e) e.preventDefault();
 
     this.props.sendMessage(this.state.text);

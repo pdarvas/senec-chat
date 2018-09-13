@@ -12,7 +12,7 @@ export class Authorizer extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.auth.onAuthStateChanged(user => {
       if (user) {
         if (!user.displayName) {
@@ -21,6 +21,7 @@ export class Authorizer extends Component {
         else {
           this.setState({login: false});
         }
+        this.props.setUid(user.uid);
       } else {
         this.setState({login: true});
       }
@@ -68,7 +69,6 @@ export class Authorizer extends Component {
 
   render() {
     const {login, signin} = this.state;
-
     return (
       <div>
         <LoginDialog open={login} login={this.login}/>
