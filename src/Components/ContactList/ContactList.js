@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 
-const Wrapper = styled.div`
+const ContactListContainer = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
@@ -34,20 +34,16 @@ export class ContactList extends Component {
 
   }
 
-  selectContact(contact) {
-    this.props.selectContact(contact)
-  }
-
   render() {
     const { uid } = this.props;
     return (
-      <Wrapper>
+      <ContactListContainer>
         <CustomBar text={'Contatos'}/>
         <List>
         {this.state.contacts.filter(contact => contact.key !== uid).map(contact => (
           <ListItem
             button
-            onClick={() => this.selectContact(contact)}
+            onClick={() => this.props.selectContact(contact)}
           >
             <Avatar src={contact.photo} />
             <ListItemText primary={contact.name} />
@@ -55,7 +51,7 @@ export class ContactList extends Component {
         ))
         }
         </List>
-      </Wrapper>
+      </ContactListContainer>
     );
   }
 }

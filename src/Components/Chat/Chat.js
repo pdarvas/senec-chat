@@ -4,17 +4,22 @@ import {CustomBar} from "../CustomBar";
 import {MessageBar} from "./MessageBar";
 import {MessageBalloon} from "./MessageBaloon";
 
-const Wrapper = styled.div`
+const ChatContainer = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
   position: relative;
 `;
 
-const MessagesWrapper = styled.div`
+const MessagesContainer = styled.div`
   height: calc(100% - 114px);
   overflow: auto;
   background-color: #fbfbfb;
+`;
+
+const MessagesEnd = styled.div`
+  float: left;
+  clear: both;
 `;
 
 export class Chat extends Component {
@@ -23,7 +28,6 @@ export class Chat extends Component {
 
     this.state = {
       messages: [],
-      chatId: undefined
     }
   }
 
@@ -35,34 +39,30 @@ export class Chat extends Component {
     } = this.props;
 
     if (selectedContact.key !== nextProps.selectedContact.key) {
-      db.fetch(`users/${uid}/chats/${nextProps.selectedContact.key}`, {
-        then: (data) => {
-          if (typeof data === 'string')
-            this.setState({chatId: data});
-          else {
-            this.createChat();
-          }
-        }
-      });
-    }
+      const chatIdPath = `users/${uid}/chats/${nextProps.selectedContact.key}`;
 
-    if ((this.state.chatId !== nextState.chatId) && nextState.chatId) {
-      if (this.sync) db.removeBinding(this.sync);
-      this.sync = db.syncState(`chats/${nextState.chatId}`, {
-        context: this,
-        state: 'messages',
-        asArray: true
+      db.fetch(chatIdPath, {
+        then: this.parseChatId
       });
     }
   }
 
-  sendMessage(message) {
-    this.setState({messages: [...this.state.messages, {text: message, author: this.props.uid}]})
-  }
+  sendMessage = (message) => {
+    const newMessage = {
+      text: message,
+      author: this.props.uid
+    };
 
-  setChatId(data) {
+    this.setState({messages: [...this.state.messages, newMessage]})
+  };
 
-  }
+  parseChatId = (chatId) => {
+    if (typeof chatId === 'string')
+      this.syncChat(chatId);
+    else {
+      this.createChat();
+    }
+  };
 
   createChat() {
     const {
@@ -83,7 +83,23 @@ export class Chat extends Component {
       data: chatId
     });
 
-    this.setState({chatId})
+    this.syncChat(chatId)
+  }
+
+  syncChat(chatId) {
+    const {
+      db
+    } = this.props;
+
+    const chatPath = `chats/${chatId}`;
+
+    if (this.sync) db.removeBinding(this.sync);
+
+    this.sync = db.syncState(chatPath, {
+      context: this,
+      state: 'messages',
+      asArray: true
+    });
   }
 
   componentDidUpdate() {
@@ -91,18 +107,33 @@ export class Chat extends Component {
   }
 
   render() {
-    const { selectedContact } = this.props;
+    const {
+      selectedContact,
+      uid
+    } = this.props;
+
+    const {
+      messages
+    } = this.state;
+
     return (
-      <Wrapper>
-        <CustomBar text={selectedContact.name} photo={selectedContact.photo}/>
-        <MessagesWrapper>
+      <ChatContainer>
+        <CustomBar
+          text={selectedContact.name}
+          photo={selectedContact.photo}/>
+        <MessagesContainer>
           {
-            selectedContact.name && this.state.messages.map(message => <MessageBalloon message={message.text} isMine={message.author === this.props.uid}/>)
+            messages.map(message => (
+              <MessageBalloon
+                message={message.text}
+                isMine={message.author === uid}
+              />
+            ))
           }
-          <div style={{float: 'left', clear: 'both'}} ref={(el) => { this.messagesEnd = el; }} />
-        </MessagesWrapper>
-        {selectedContact.name && <MessageBar sendMessage={(message) => this.sendMessage(message)}/>}
-      </Wrapper>
+          <MessagesEnd innerRef={(el) => this.messagesEnd = el} />
+        </MessagesContainer>
+        <MessageBar sendMessage={this.sendMessage} />
+      </ChatContainer>
     );
   }
 }

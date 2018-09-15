@@ -14,12 +14,15 @@ class App extends Component {
     }
   }
 
-  selectContact(contact) {
+  selectContact = (contact) => {
     this.setState({selectedContact: contact})
-  }
+  };
 
   render() {
-    const {selectedContact, uid} = this.state;
+    const {
+      selectedContact,
+      uid
+    } = this.state;
 
     const {
       auth,
@@ -27,12 +30,15 @@ class App extends Component {
     } = this.props;
 
     return (
-      <AppConfig auth={auth} db={db} setUid={(uid) => this.setState({uid})}>
+      <AppConfig
+        auth={auth}
+        db={db}
+        setUid={(uid) => this.setState({uid})}
+      >
         <Grid container spacing={0}>
           <Grid item xs={3}>
             <ContactList
-              selectContact={(contact) => this.selectContact(contact)}
-              selectedContact={selectedContact}
+              selectContact={this.selectContact}
               uid={uid}
               db={db}
             />
