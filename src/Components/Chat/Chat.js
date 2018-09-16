@@ -8,17 +8,6 @@ const ChatContainer = styled.div`
   position: relative;
 `;
 
-const MessagesContainer = styled.div`
-  height: calc(100% - 114px);
-  overflow: auto;
-  background-color: #fbfbfb;
-`;
-
-const MessagesEnd = styled.div`
-  float: left;
-  clear: both;
-`;
-
 const messagesMock = [
   {
     text: 'asadfaf',
@@ -84,18 +73,14 @@ export class Chat extends Component {
     }
   }
 
-  sendMessage = (message) => {
+  sendMessage = (text) => {
     // Essa funcao recebe uma mensagem como string e deve adiciona-la ao estado "messages"
+    // Não esquecer que a mensagem na verdade é um objeto com um text, que contem o texto, e um author, que contem seu uid
 
     const {
       uid
     } = this.props;
 
-    // A mensagem deve estar em um objeto como o seguinte
-    const newMessage = {
-      text: '',
-      author: ''
-    };
 
   };
 
@@ -126,10 +111,6 @@ export class Chat extends Component {
 
   }
 
-  componentDidUpdate() {
-    this.messagesEnd.scrollIntoView();
-  }
-
   render() {
     const {
       selectedContact,
@@ -142,14 +123,8 @@ export class Chat extends Component {
 
     return (
       <ChatContainer>
-        {/* Aqui deve entrar uma CustomBar com o nome e a foto do contato selecionado. */}
-
-        <MessagesContainer>
-          {/* Aqui deve entrar a lista de mensagens, utilizando o componente MessageBaloon para cada mensagem. */}
-          <MessagesEnd innerRef={(el) => this.messagesEnd = el} />
-        </MessagesContainer>
-
-        {/* Aqui deve entrar o componente MessageBar. */}
+        {/* Esse componente deve conter uma CustomBar com o nome e a foto do contato selecionado,
+            uma MessagesList, que contem a lista de mensagens, utilizando MessageBaloon, e uma MessageBar.*/}
       </ChatContainer>
     );
   }
