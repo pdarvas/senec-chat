@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import {AppConfig} from "./Components/AppConfig/AppConfig";
-import Grid from '@material-ui/core/Grid';
-import {ContactList} from "./Components/ContactList/ContactList";
-import {Chat} from "./Components/Chat/Chat";
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +12,7 @@ class App extends Component {
   }
 
   selectContact = (contact) => {
-    this.setState({selectedContact: contact})
+    // Essa função recebe um contato e deve coloca-lo no estado "selectedContact".
   };
 
   render() {
@@ -35,22 +32,8 @@ class App extends Component {
         db={db}
         setUid={(uid) => this.setState({uid})}
       >
-        <Grid container spacing={0}>
-          <Grid item xs={3}>
-            <ContactList
-              selectContact={this.selectContact}
-              uid={uid}
-              db={db}
-            />
-          </Grid>
-          <Grid item xs={9}>
-            <Chat
-              selectedContact={selectedContact}
-              uid={uid}
-              db={db}
-            />
-          </Grid>
-        </Grid>
+        {/*Esse componente deve conter os componentes ContactList e Chat.*/}
+
       </AppConfig>
     );
   }

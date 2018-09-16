@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import {CustomBar} from "../CustomBar";
-import {MessageBar} from "./MessageBar";
-import {MessageBalloon} from "./MessageBaloon";
 
 const ChatContainer = styled.div`
   width: 100%;
@@ -22,12 +19,51 @@ const MessagesEnd = styled.div`
   clear: both;
 `;
 
+const messagesMock = [
+  {
+    text: 'asadfaf',
+    author: ''
+  },
+  {
+    text: 'adfadsfaf',
+    author: ''
+  },
+  {
+    text: 'afdadfadsf',
+    author: ''
+  },
+  {
+    text: 'adfadsf',
+    author: ''
+  },
+  {
+    text: 'afsdafaf',
+    author: ''
+  },
+  {
+    text: 'adsfafd',
+    author: ''
+  },
+  {
+    text: 'adsfadfsaf',
+    author: ''
+  },
+  {
+    text: 'adsfaf',
+    author: ''
+  },
+  {
+    text: 'asdfadsfaf',
+    author: ''
+  }
+];
+
 export class Chat extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      messages: [],
+      messages: messagesMock,
     }
   }
 
@@ -39,7 +75,8 @@ export class Chat extends Component {
     } = this.props;
 
     if (selectedContact.key !== nextProps.selectedContact.key) {
-      const chatIdPath = `users/${uid}/chats/${nextProps.selectedContact.key}`;
+      // a variavel chatIdPath deve conter o caminho para o id do chat com o contato selecionado atual
+      const chatIdPath = ``;
 
       db.fetch(chatIdPath, {
         then: this.parseChatId
@@ -48,58 +85,45 @@ export class Chat extends Component {
   }
 
   sendMessage = (message) => {
+    // Essa funcao recebe uma mensagem como string e deve adiciona-la ao estado "messages"
+
+    const {
+      uid
+    } = this.props;
+
+    // A mensagem deve estar em um objeto como o seguinte
     const newMessage = {
-      text: message,
-      author: this.props.uid
+      text: '',
+      author: ''
     };
 
-    this.setState({messages: [...this.state.messages, newMessage]})
   };
 
   parseChatId = (chatId) => {
-    if (typeof chatId === 'string')
-      this.syncChat(chatId);
-    else {
-      this.createChat();
-    }
+    // Essa funcao recebe um chatId como string. Caso ele nao exista, recebe um objeto vazio.
+    // Ela deve verificar se o chatId é uma string. Caso positivo, deve fazer o sync do chat. Caso negativo, deve criar um novo chat.
   };
 
   createChat() {
+    // Essa funcao deve fazer 3 coisas:
+    // 1. Criar um novo chatId aleatório.
+    // 2. Adicionar o chatId à lista de chats dos dois usuários na conversa.
+    // 3. Fazer o sync do chat.
+
     const {
       uid,
       selectedContact,
       db
     } = this.props;
 
-    const chatId = db.push(`chats`, {
-      data: {}
-    }).key;
-
-    db.post(`users/${uid}/chats/${selectedContact.key}`, {
-      data: chatId
-    });
-
-    db.post(`users/${selectedContact.key}/chats/${uid}`, {
-      data: chatId
-    });
-
-    this.syncChat(chatId)
   }
 
   syncChat(chatId) {
+    // Essa função recebe um chatId e deve realizar a sincronização do estado "messages" com o chat do firebase.
     const {
       db
     } = this.props;
 
-    const chatPath = `chats/${chatId}`;
-
-    if (this.sync) db.removeBinding(this.sync);
-
-    this.sync = db.syncState(chatPath, {
-      context: this,
-      state: 'messages',
-      asArray: true
-    });
   }
 
   componentDidUpdate() {
@@ -118,21 +142,14 @@ export class Chat extends Component {
 
     return (
       <ChatContainer>
-        <CustomBar
-          text={selectedContact.name}
-          photo={selectedContact.photo}/>
+        {/* Aqui deve entrar uma CustomBar com o nome e a foto do contato selecionado. */}
+
         <MessagesContainer>
-          {
-            messages.map(message => (
-              <MessageBalloon
-                message={message.text}
-                isMine={message.author === uid}
-              />
-            ))
-          }
+          {/* Aqui deve entrar a lista de mensagens, utilizando o componente MessageBaloon para cada mensagem. */}
           <MessagesEnd innerRef={(el) => this.messagesEnd = el} />
         </MessagesContainer>
-        <MessageBar sendMessage={this.sendMessage} />
+
+        {/* Aqui deve entrar o componente MessageBar. */}
       </ChatContainer>
     );
   }

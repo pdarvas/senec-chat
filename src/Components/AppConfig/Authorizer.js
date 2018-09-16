@@ -33,7 +33,7 @@ export class Authorizer extends Component {
 
     auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
       .catch(err => {
-        console.log('err: ', err)
+        console.log('err: ', err);
         if (err.code === 'auth/user-not-found') {
           this.signin(email, password);
         } else {

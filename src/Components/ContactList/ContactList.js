@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import {CustomBar} from "../CustomBar";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
 
 const ContactListContainer = styled.div`
   width: 100%;
@@ -12,45 +7,85 @@ const ContactListContainer = styled.div`
   box-sizing: border-box;
 `;
 
+
+const contactsMock = [
+  {
+    name: 'Usuario 1',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '0'
+  },
+  {
+    name: 'Usuario 2',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '1'
+  },
+  {
+    name: 'Usuario 3',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '2'
+  },
+  {
+    name: 'Usuario 4',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '3'
+  },
+  {
+    name: 'Usuario 5',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '4'
+  },
+  {
+    name: 'Usuario 6',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '5'
+  },
+  {
+    name: 'Usuario 7',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '6'
+  },
+  {
+    name: 'Usuario 8',
+    photo: 'https://media.licdn.com/dms/image/C560BAQGkTSO7NpWTdg/company-logo_200_200/0?e=2159024400&v=beta&t=-m8lTrxptwTCLqdXf-HwthWYf1rAyjbsWxDRD04qddg',
+    key: '7'
+  },
+];
+
 export class ContactList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contacts: []
+      contacts: contactsMock
     }
   }
 
   componentDidMount() {
+    this.bindContacts()
+  }
+
+  bindContacts = () => {
+    // Essa funcao deve realizar o bind do estado "contacts" com a lista de usuários do firebase.
     const {
       db
     } = this.props;
 
-    db.bindToState(`users`, {
-      context: this,
-      state: 'contacts',
-      asArray: true
-    })
 
-  }
+  };
 
   render() {
-    const { uid } = this.props;
+    const {
+      uid
+    } = this.props;
+
+    const {
+      contacts
+    } = this.state;
+
     return (
       <ContactListContainer>
-        <CustomBar text={'Contatos'}/>
-        <List>
-        {this.state.contacts.filter(contact => contact.key !== uid).map(contact => (
-          <ListItem
-            button
-            onClick={() => this.props.selectContact(contact)}
-          >
-            <Avatar src={contact.photo} />
-            <ListItemText primary={contact.name} />
-          </ListItem>
-        ))
-        }
-        </List>
+        {/* Esse componente deve conter uma CustomBar contendo o nome do Aplicativo e uma lista de contatos. */}
+        {/* A referência para a lista encontra-se no link https://material-ui.com/demos/lists/ */}
       </ContactListContainer>
     );
   }
