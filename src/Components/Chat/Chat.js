@@ -10,39 +10,15 @@ const ChatContainer = styled.div`
 
 const messagesMock = [
   {
-    text: 'asadfaf',
+    text: 'Oi, tudo bem?',
     author: ''
   },
   {
-    text: 'adfadsfaf',
+    text: 'Você sabia que',
     author: ''
   },
   {
-    text: 'afdadfadsf',
-    author: ''
-  },
-  {
-    text: 'adfadsf',
-    author: ''
-  },
-  {
-    text: 'afsdafaf',
-    author: ''
-  },
-  {
-    text: 'adsfafd',
-    author: ''
-  },
-  {
-    text: 'adsfadfsaf',
-    author: ''
-  },
-  {
-    text: 'adsfaf',
-    author: ''
-  },
-  {
-    text: 'asdfadsfaf',
+    text: 'O Palmeiras não tem mundial?',
     author: ''
   }
 ];
@@ -53,24 +29,27 @@ export class Chat extends Component {
 
     this.state = {
       messages: messagesMock,
-    }
+    };
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  defaultProps = {
+    selectedContact: {}
+  }
+
+  componentDidUpdate(lastProps) {
     const {
       uid,
       selectedContact,
       db
     } = this.props;
 
-    if (selectedContact.key !== nextProps.selectedContact.key) {
-      // a variavel chatIdPath deve conter o caminho para o id do chat com o contato selecionado atual
-      const chatIdPath = ``;
-
-      db.fetch(chatIdPath, {
-        then: this.parseChatId
-      });
+    if (lastProps.selectedContact.key !== selectedContact.key) {
+      this.fetchChatId(selectedContact.key);
     }
+  }
+
+  fetchChatId = (contactId) => {
+    // Essa funcao recebe o id de um contato e deve buscar o id do chat seu com esse contato.
   }
 
   sendMessage = (text) => {
@@ -85,7 +64,8 @@ export class Chat extends Component {
   };
 
   parseChatId = (chatId) => {
-    // Essa funcao recebe um chatId como string. Caso ele nao exista, recebe um objeto vazio.
+    // Essa funcao será chamada pelo firebase quando o "fetch" acabar.
+    // Ela recebe um chatId como string. Caso ele nao exista, recebe um objeto vazio.
     // Ela deve verificar se o chatId é uma string. Caso positivo, deve fazer o sync do chat. Caso negativo, deve criar um novo chat.
   };
 

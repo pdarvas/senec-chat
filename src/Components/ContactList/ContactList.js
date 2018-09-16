@@ -57,15 +57,23 @@ export class ContactList extends Component {
 
     this.state = {
       contacts: contactsMock
-    }
+    };
   }
 
   componentDidMount() {
-    this.bindContacts()
+    this.fetchContacts();
   }
 
-  bindContacts = () => {
-    // Essa funcao deve realizar o bind do estado "contacts" com a lista de usuários do firebase.
+  parseContacts = (contacts) => {
+    // Essa funcao será chamada pelo firebase quando o "fetch" dos contatos acabar
+    // Ela receberá um array de contatos, e deverá coloca-lo no estado "contatos". Sugestao: filtrar a lista para remover seu próprio contato.
+    const {
+      uid
+    } = this.props;
+  }
+
+  fetchContacts = () => {
+    // Essa funcao deve buscar a lista de usuários como um array, e passar como tratamento a funcao parseContacts.
     const {
       db
     } = this.props;

@@ -28,7 +28,7 @@ export class MessageBar extends Component {
 
     this.state = {
       text: ''
-    }
+    };
   }
 
   sendMessage(e) {
@@ -36,7 +36,7 @@ export class MessageBar extends Component {
 
     this.props.sendMessage(this.state.text);
 
-    this.setState({text: ''})
+    this.setState({text: ''});
   }
 
   render() {

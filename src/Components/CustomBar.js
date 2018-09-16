@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const CustomAvatar = styled(Avatar)`
   margin-right: 10px;
