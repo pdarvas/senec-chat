@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       selectedContact: {},
       uid: undefined
-    }
+    };
   }
 
   selectContact = (contact) => {
