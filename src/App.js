@@ -32,7 +32,8 @@ class App extends Component {
         db={db}
         setUid={(uid) => this.setState({uid})}
       >
-        {/*Esse componente deve conter os componentes ContactList e Chat.*/}
+        {/* Esse componente deve conter os componentes ContactList e Chat, dentro de um Grid */}
+        {/* https://material-ui.com/layout/grid/ */}
 
       </AppConfig>
     );
