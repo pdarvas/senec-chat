@@ -11,6 +11,7 @@ const ChatContainer = styled.div`
   height: 100vh;
   box-sizing: border-box;
   position: relative;
+  border: 1px solid red;
 `;
 
 const messagesMock = [
