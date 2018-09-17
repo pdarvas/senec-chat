@@ -91,7 +91,7 @@ export class ContactList extends Component {
 
   render() {
     const {
-      uid
+      selectContact
     } = this.props;
 
     const {
@@ -102,6 +102,24 @@ export class ContactList extends Component {
       <ContactListContainer>
         {/* Esse componente deve conter uma CustomBar contendo o nome do Aplicativo e uma lista de contatos. */}
         {/* A referência para a lista encontra-se no link https://material-ui.com/demos/lists/ */}
+        <CustomBar text={'Senec Chat'}/>
+        <List>
+          {contacts.map(contact => {
+            const onClick = () => {
+              selectContact(contact);
+            };
+
+            return (
+            <ListItem
+              button
+              onClick={onClick}
+            >
+              <Avatar src={contact.photo}/>
+              <ListItemText primary={contact.name}/>
+            </ListItem>
+            );
+          })}
+        </List>
       </ContactListContainer>
     );
   }

@@ -5,6 +5,7 @@ import { MessagesList } from './MessagesList';
 import { MessageBar } from './MessageBar';
 import { MessageBalloon } from './MessageBaloon';
 import { CustomBar } from '../CustomBar';
+import {v4} from 'uuid';
 
 const ChatContainer = styled.div`
   width: 100%;
@@ -52,6 +53,10 @@ export class Chat extends Component {
 
   fetchChatId = (contactId) => {
     // Essa funcao recebe o id de um contato e deve buscar o id do chat seu com esse contato.
+    const {
+      uid,
+      db
+    } = this.props;
   }
 
   sendMessage = (text) => {
@@ -61,6 +66,10 @@ export class Chat extends Component {
     const {
       uid
     } = this.props;
+
+    const {
+      messages
+    } = this.state;
 
   };
 
@@ -81,6 +90,7 @@ export class Chat extends Component {
       selectedContact,
       db
     } = this.props;
+    console.log('createChat');
 
   }
 
@@ -89,7 +99,7 @@ export class Chat extends Component {
     const {
       db
     } = this.props;
-
+    console.log('syncChat', chatId);
   }
 
   render() {
