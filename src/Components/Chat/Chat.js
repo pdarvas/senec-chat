@@ -52,6 +52,12 @@ export class Chat extends Component {
 
   fetchChatId = (contactId) => {
     // Essa funcao recebe o id de um contato e deve buscar o id do chat seu com esse contato.
+    const {
+      db,
+      uid
+    } = this.props;
+
+    db.fetch(`users/${uid}/chats/${contactId}`, {}).then(this.parseChatId);
   }
 
   sendMessage = (text) => {
@@ -79,6 +85,12 @@ export class Chat extends Component {
     // Essa funcao será chamada pelo firebase quando o "fetch" acabar.
     // Ela recebe um chatId como string. Caso ele nao exista, recebe um objeto vazio.
     // Ela deve verificar se o chatId é uma string. Caso positivo, deve fazer o sync do chat. Caso negativo, deve criar um novo chat.
+    
+    if(typeof chatId === 'string') {
+      this.syncChat(chatId);
+    } else {
+      this.createChat();
+    }
   };
 
   createChat() {
@@ -93,6 +105,7 @@ export class Chat extends Component {
       db
     } = this.props;
 
+    console.log('createChat');
   }
 
   syncChat(chatId) {
@@ -100,6 +113,8 @@ export class Chat extends Component {
     const {
       db
     } = this.props;
+
+    console.log('syncChat', chatId);
 
   }
 
