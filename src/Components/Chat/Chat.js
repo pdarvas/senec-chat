@@ -5,6 +5,7 @@ import { MessagesList } from './MessagesList';
 import { MessageBar } from './MessageBar';
 import { MessageBalloon } from './MessageBaloon';
 import { CustomBar } from '../CustomBar';
+import {v4} from 'uuid';
 
 const ChatContainer = styled.div`
   width: 100%;
@@ -105,7 +106,18 @@ export class Chat extends Component {
       db
     } = this.props;
 
-    console.log('createChat');
+    const chatId = v4();
+
+    db.post(`users/${uid}/chats/${selectedContact.key}`, {
+      data: chatId
+    });
+
+    db.post(`users/${selectedContact.key}/chats/${uid}`, {
+      data: chatId
+    });
+
+    this.syncChat(chatId);
+
   }
 
   syncChat(chatId) {
@@ -115,8 +127,10 @@ export class Chat extends Component {
     } = this.props;
 
     console.log('syncChat', chatId);
+    
+    if(this.sync) db.removeBinding(this.sync);
 
-    db.syncState(`chats/${chatId}`, {
+    this.sync = db.syncState(`chats/${chatId}`, {
       state: 'messages',
       context: this,
       asArray: true
