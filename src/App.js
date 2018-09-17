@@ -43,6 +43,7 @@ class App extends Component {
           <Grid item xs={3}>
             <ContactList
               selectContact={this.selectContact}
+              db={db}
             />
           </Grid>
           <Grid item xs={9}>
