@@ -16,6 +16,7 @@ class App extends Component {
 
   selectContact = (contact) => {
     // Essa função recebe um contato e deve coloca-lo no estado "selectedContact".
+    this.setState({selectedContact: contact});
   };
 
   render() {
@@ -40,10 +41,12 @@ class App extends Component {
 
         <Grid container>
           <Grid item xs={3}>
-
+            <ContactList
+              selectContact={this.selectContact}
+            />
           </Grid>
           <Grid item xs={9}>
-
+            <Chat/>
           </Grid>
         </Grid>
 
