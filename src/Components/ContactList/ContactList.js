@@ -91,7 +91,7 @@ export class ContactList extends Component {
 
   render() {
     const {
-      uid
+      selectContact
     } = this.props;
 
     const {

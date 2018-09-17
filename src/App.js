@@ -40,10 +40,10 @@ class App extends Component {
 
         <Grid container>
           <Grid item xs={3}>
-
+            <ContactList/>
           </Grid>
           <Grid item xs={9}>
-
+            <Chat/>
           </Grid>
         </Grid>
 
