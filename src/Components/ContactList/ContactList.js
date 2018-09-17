@@ -12,6 +12,7 @@ const ContactListContainer = styled.div`
   height: 100vh;
   box-sizing: border-box;
   overflow: auto;
+  border: 1px solid red;
 `;
 
 
@@ -90,7 +91,7 @@ export class ContactList extends Component {
 
   render() {
     const {
-      uid
+      selectContact
     } = this.props;
 
     const {
