@@ -5,6 +5,7 @@ import { MessagesList } from './MessagesList';
 import { MessageBar } from './MessageBar';
 import { MessageBalloon } from './MessageBaloon';
 import { CustomBar } from '../CustomBar';
+import {v4} from 'uuid';
 
 const ChatContainer = styled.div`
   width: 100%;
@@ -52,6 +53,10 @@ export class Chat extends Component {
 
   fetchChatId = (contactId) => {
     // Essa funcao recebe o id de um contato e deve buscar o id do chat seu com esse contato.
+    const {
+      uid,
+      db
+    } = this.props;
   }
 
   sendMessage = (text) => {
@@ -61,6 +66,17 @@ export class Chat extends Component {
     const {
       uid
     } = this.props;
+
+    const {
+      messages
+    } = this.state;
+
+    const newMessage = {
+      text: text,
+      author: uid
+    };
+
+    this.setState({messages: messages.concat(newMessage)});
 
   };
 
@@ -81,15 +97,16 @@ export class Chat extends Component {
       selectedContact,
       db
     } = this.props;
-
+    console.log('createChat');
   }
-
+  
   syncChat(chatId) {
     // Essa função recebe um chatId e deve realizar a sincronização do estado "messages" com o chat do firebase.
     const {
       db
     } = this.props;
-
+    
+    console.log('syncChat', chatId);
   }
 
   render() {
@@ -106,7 +123,13 @@ export class Chat extends Component {
       <ChatContainer>
         {/* Esse componente deve conter uma CustomBar com o nome e a foto do contato selecionado,
             uma MessagesList, que contem a lista de mensagens, utilizando MessageBaloon, e uma MessageBar.*/}
+            <CustomBar text={selectedContact.name} photo={selectedContact.photo} />
+            <MessagesList>
+              {messages.map(message => <MessageBalloon message={message.text} isMine={uid === message.author} />)}
+            </MessagesList>
+            <MessageBar sendMessage={this.sendMessage}/>
       </ChatContainer>
+
     );
   }
 }

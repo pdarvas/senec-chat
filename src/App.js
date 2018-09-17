@@ -46,7 +46,10 @@ class App extends Component {
             />
           </Grid>
           <Grid item xs={9}>
-            <Chat/>
+            <Chat 
+              selectedContact={selectedContact}
+              uid={uid}
+            />
           </Grid>
         </Grid>
 
