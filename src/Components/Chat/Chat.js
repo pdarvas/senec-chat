@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { MessagesList } from './MessagesList';
+import { MessageBar } from './MessageBar';
+import { MessageBalloon } from './MessageBaloon';
+import { CustomBar } from '../CustomBar';
 
 const ChatContainer = styled.div`
   width: 100%;

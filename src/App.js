@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {AppConfig} from "./Components/AppConfig/AppConfig";
 import Grid from '@material-ui/core/Grid';
+import {ContactList} from "./Components/ContactList/ContactList";
+import {Chat} from "./Components/Chat/Chat";
 
 class App extends Component {
   constructor(props) {
