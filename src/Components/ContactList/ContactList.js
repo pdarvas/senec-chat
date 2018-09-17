@@ -74,10 +74,15 @@ export class ContactList extends Component {
 
   parseContacts = (contacts) => {
     // Essa funcao será chamada pelo firebase quando o "fetch" dos contatos acabar
-    // Ela receberá um array de contatos, e deverá coloca-lo no estado "contatos". Sugestao: filtrar a lista para remover seu próprio contato.
+    // Ela receberá um array de contatos, e deverá coloca-lo no estado "contatos".
+    // Sugestao: filtrar a lista para remover seu próprio contato.
     const {
       uid
     } = this.props;
+
+    const filteredContacts = contacts.filter(contact => contact.key !== uid);
+
+    this.setState({contacts: filteredContacts});
   }
 
   fetchContacts = () => {
@@ -86,6 +91,9 @@ export class ContactList extends Component {
       db
     } = this.props;
 
+    db.fetch('users', {
+      asArray: true
+    }).then(this.parseContacts);
 
   };
 
