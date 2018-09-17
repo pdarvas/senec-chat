@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ChatContainer = styled.div`
   width: 100%;
@@ -32,10 +33,6 @@ export class Chat extends Component {
     };
   }
 
-  defaultProps = {
-    selectedContact: {}
-  }
-
   componentDidUpdate(lastProps) {
     const {
       uid,
@@ -59,7 +56,6 @@ export class Chat extends Component {
     const {
       uid
     } = this.props;
-
 
   };
 
@@ -110,4 +106,17 @@ export class Chat extends Component {
   }
 }
 
+Chat.propTypes = {
+  db: PropTypes.any,
+  uid: PropTypes.string,
+  selectedContact: PropTypes.shape({
+    name: PropTypes.string,
+    photo: PropTypes.string,
+    key: PropTypes.string
+  })
+};
 
+Chat.defaultProps = {
+  selectedContact: {},
+  uid: ''
+};

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ContactListContainer = styled.div`
   width: 100%;
@@ -99,4 +100,8 @@ export class ContactList extends Component {
   }
 }
 
-
+ContactList.propTypes = {
+  db: PropTypes.any,
+  uid: PropTypes.string,
+  selectContact: PropTypes.func
+};

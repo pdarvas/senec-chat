@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from "@material-ui/core/Grid/Grid";
-
+import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -65,4 +65,6 @@ export class MessageBar extends Component {
   }
 }
 
-
+MessageBar.propTypes = {
+  sendMessage: PropTypes.func
+};
