@@ -43,6 +43,7 @@ class App extends Component {
           <Grid item xs={3}>
             <ContactList
               selectContact={this.selectContact}
+              uid={uid}
               db={db}
             />
           </Grid>
@@ -50,6 +51,7 @@ class App extends Component {
             <Chat 
               selectedContact={selectedContact}
               uid={uid}
+              db={db}
             />
           </Grid>
         </Grid>
