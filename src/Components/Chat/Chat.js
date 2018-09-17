@@ -116,6 +116,12 @@ export class Chat extends Component {
 
     console.log('syncChat', chatId);
 
+    db.syncState(`chats/${chatId}`, {
+      state: 'messages',
+      context: this,
+      asArray: true
+    });
+
   }
 
   render() {
