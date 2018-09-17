@@ -6,6 +6,7 @@ const ContactListContainer = styled.div`
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+  overflow: auto;
 `;
 
 

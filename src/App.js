@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {AppConfig} from "./Components/AppConfig/AppConfig";
+import Grid from '@material-ui/core/Grid';
 
 class App extends Component {
   constructor(props) {
@@ -34,6 +35,15 @@ class App extends Component {
       >
         {/* Esse componente deve conter os componentes ContactList e Chat, dentro de um Grid */}
         {/* https://material-ui.com/layout/grid/ */}
+
+        <Grid container>
+          <Grid item xs={3}>
+
+          </Grid>
+          <Grid item xs={9}>
+
+          </Grid>
+        </Grid>
 
       </AppConfig>
     );
